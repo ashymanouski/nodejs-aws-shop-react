@@ -9,7 +9,8 @@ from aws_cdk import (
     aws_s3_deployment as s3deploy,
     RemovalPolicy,
     CfnOutput,
-    Tags
+    Tags,
+    Duration
 )
 from constructs import Construct
 
@@ -56,7 +57,15 @@ class CdkStackAwsDev22Stack(Stack):
                 cache_policy=cloudfront.CachePolicy.CACHING_OPTIMIZED,
             ),
             default_root_object="index.html",
-            comment="aws-dev-2-2: automated deployment"
+            comment="aws-dev-2-2: automated deployment",
+            error_responses=[
+                cloudfront.ErrorResponse(
+                    http_status=404,
+                    response_http_status=200,
+                    response_page_path="/index.html",
+                    ttl=Duration.minutes(0)
+                )
+            ]
         )
         apply_tags(distribution)
 
