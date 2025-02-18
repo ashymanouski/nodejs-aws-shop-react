@@ -7,6 +7,7 @@ from aws_cdk import (
     aws_cloudfront as cloudfront,
     aws_cloudfront_origins as origins,
     aws_s3_deployment as s3deploy,
+    aws_iam as iam,
     RemovalPolicy,
     CfnOutput,
     Tags,
@@ -46,6 +47,20 @@ class CdkStackAwsDev22Stack(Stack):
         )
         apply_tags(origin_access_identity)
 
+        # # Grant read permissions to the OAI
+        # website_bucket.grant_read(origin_access_identity)
+
+        # # Add bucket policy
+        # website_bucket.add_to_resource_policy(
+        #     iam.PolicyStatement(
+        #         actions=["s3:GetObject"],
+        #         resources=[website_bucket.arn_for_objects("*")],
+        #         principals=[iam.CanonicalUserPrincipal(
+        #             origin_access_identity.cloud_front_origin_access_identity_s3_canonical_user_id
+        #         )]
+        #     )
+        # )
+
         distribution = cloudfront.Distribution(
             self, "WebsiteDistribution",
             default_behavior=cloudfront.BehaviorOptions(
@@ -59,6 +74,12 @@ class CdkStackAwsDev22Stack(Stack):
             default_root_object="index.html",
             comment="aws-dev-2-2: automated deployment",
             error_responses=[
+                cloudfront.ErrorResponse(
+                    http_status=403,
+                    response_http_status=200,
+                    response_page_path="/index.html",
+                    ttl=Duration.minutes(0)
+                ),
                 cloudfront.ErrorResponse(
                     http_status=404,
                     response_http_status=200,
