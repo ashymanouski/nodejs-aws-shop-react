@@ -14,7 +14,7 @@ Manual creation
 
 Automatic creation (using CDK)
 - Bucket URL: http://aws-dev-2-2-shymanouski.s3.us-east-1.amazonaws.com
-- CloudFront URL: https://d2ysfb0ful54fo.cloudfront.net
+- CloudFront URL: https://d2pdn8rt2xkltz.cloudfront.net
 
 Additionally:
 - The display of product images was fixed according to the following advice of @SunSundr: https://discord.com/channels/1018779355155013693/1084767995341058128/1339524661175648278
