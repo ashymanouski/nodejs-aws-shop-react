@@ -7,7 +7,7 @@ from cdk_stack_aws_dev_2_2.cdk_stack_aws_dev_2_2_stack import CdkStackAwsDev22St
 
 
 app = cdk.App()
-CdkStackAwsDev22Stack(app, "CdkStackAwsDev22Stack",
+CdkStackAwsDev22Stack(app, "FrontendCdkStack",
     # If you don't specify 'env', this stack will be environment-agnostic.
     # Account/Region-dependent features and context lookups will not work,
     # but a single synthesized template can be deployed anywhere.
