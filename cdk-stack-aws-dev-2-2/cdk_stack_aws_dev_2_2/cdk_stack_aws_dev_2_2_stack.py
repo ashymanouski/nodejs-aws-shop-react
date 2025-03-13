@@ -20,11 +20,11 @@ class CdkStackAwsDev22Stack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        self.template_options.description = "Task #3: Frontend Stack with Lambda functions and API Gateway integration"
+        self.template_options.description = "Task #5: Frontend Stack with Import service"
 
         bucket_name = "aws-dev-shymanouski"
         tags = {
-            "task": "2.2",
+            "task": "5",
             "owner": "ashymanouski"
         }
 
