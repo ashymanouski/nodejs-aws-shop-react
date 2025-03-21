@@ -7,6 +7,24 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { theme } from "~/theme";
+import axios from 'axios';
+
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response) {
+      switch (error.response.status) {
+        case 401:
+          alert('Unauthorized (401): Please provide valid credentials');
+          break;
+        case 403:
+          alert('Forbidden (403): You don\'t have permission to access this resource');
+          break;
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 const queryClient = new QueryClient({
   defaultOptions: {
